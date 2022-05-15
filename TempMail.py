@@ -1,7 +1,8 @@
+import requests
+
 class TempMail:
-
-    BASE_URL = "https://api.tempmail.lol";
-
+    global BASE_URL
+    BASE_URL = "https://api.tempmail.lol"
     
     
     """
@@ -17,7 +18,7 @@ class TempMail:
             "User-Agent": "TempMailJavaAPI/1.0",
             "Accept": "application/json"
         }
-        connection = requestes.get(BASE_URL + endpoint, headers=headers)
+        connection = requests.get(BASE_URL + endpoint, headers=headers)
         
         #read all the info from the website
         response = connection.text
