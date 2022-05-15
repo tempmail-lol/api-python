@@ -15,7 +15,7 @@ class TempMail:
         
     def makeHTTPRequest(endpoint):
         headers = {
-            "User-Agent": "TempMailJavaAPI/1.0",
+            "User-Agent": "TempMailPythonAPI/1.0",
             "Accept": "application/json"
         }
         connection = requests.get(BASE_URL + endpoint, headers=headers)
