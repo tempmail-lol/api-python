@@ -53,9 +53,9 @@ class TempMail:
             s = TempMail.makeHTTPRequest("/auth/" + inbox.token)
         except:
             print("Website responded with: "+ s)
-        data = json.load(s)
+        data = json.loads(s)
         emails = []
-        for email in data:
+        for email in data["email"]:
             emails.append(Email(email["from"], email["to"], email["subject"], email["body"], email["html"], email["date"]))
         return emails
         
