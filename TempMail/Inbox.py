@@ -1,3 +1,7 @@
+"""
+The class Inbox stores an address and an authorization token
+"""
+
 class Inbox:
     def __init__(self, address, token):
         #make the propertys immutable using @property

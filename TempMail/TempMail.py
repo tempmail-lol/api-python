@@ -9,29 +9,30 @@ class TempMail:
     
     
     """
-     * Make an HTTP request to the TempMail API.
-     * 
-     * @param endpoint The endpoint to make the request to.
-     * @return The response as a {@link String} from the server, or {@code null} if there is no response data.
-     * @throws IOException If the request fails.
-     *"""
+    Make a request to the tempmail.lol api with a given endpoint
+    The content of the request is a json string and is returned as a string object
+    """
         
     def makeHTTPRequest(endpoint):
         headers = {
             "User-Agent": "TempMailPythonAPI/1.0",
             "Accept": "application/json"
         }
-        connection = requests.get(BASE_URL + endpoint, headers=headers)
-        
-        #read all the info from the website
+        try:
+            connection = requests.get(BASE_URL + endpoint, headers=headers)
+            if connection.status_code >= 400:
+                raise Exception("HTTP Error: " + str(connection.status_code))
+        except Exception as e:
+            print(e)
+            return None
+
         response = connection.text
         
         return response
 
     """
-    Generate a new {@link Inbox}.
-    
-    @return The new {@link Inbox}, or {@code null} if the request fails.
+    GenerateInbox will generate an inbox with an address and a token
+    and returns an Inbox object
     """
     def generateInbox():
         try :
@@ -43,19 +44,24 @@ class TempMail:
         
 
     """
-    Get emails from the inbox provided the {@link Inbox}.
-    @param inbox The inbox to get emails from.
-    @return {@link Email[]} The emails received, or {@code null} if there are no emails.
-    @raises TempMailTokenExpiredException If the token is invalid.
+    getEmail gets the emails from an inbox object
+    and returns a list of Email objects
     """
     def getEmails(inbox):
-        try:
-            s = TempMail.makeHTTPRequest("/auth/" + inbox.token)
-        except:
-            print("Website responded with: "+ s)
+        s = TempMail.makeHTTPRequest("/auth/" + inbox.token)
         data = json.loads(s)
-        emails = []
-        for email in data["email"]:
-            emails.append(Email(email["from"], email["to"], email["subject"], email["body"], email["html"], email["date"]))
-        return emails
+
+        #Raise an exception if the token is invalid
+        if data["token"] == "invalid":
+            raise Exception("Invalid Token")
+
+        #if no emails are found, return an empty list
+        #else return a list of email
+        if data["email"] == None:
+            return ["None"]
+        else:
+            emails = []
+            for email in data["email"]:
+                emails.append(Email(email["from"], email["to"], email["subject"], email["body"], email["html"], email["date"]))
+            return emails
         

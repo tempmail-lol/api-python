@@ -1,3 +1,8 @@
+"""
+Email class is used to store the email data which consists of 
+the sender, recipient, subject, body, html and date
+"""
+
 class Email:
     def __init__(self, sender, recipient, subject, body, html, date):
         #make the propertys immutable using @property
