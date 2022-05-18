@@ -1,7 +1,7 @@
 import requests
 import json
-from Email import Email
-from Inbox import Inbox
+from TempMail.Email import Email
+from TempMail.Inbox import Inbox
 
 class TempMail:
     global BASE_URL

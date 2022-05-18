@@ -1,2 +1,5 @@
 __pychache__/
 TempMail/__pycache__/
+build/
+dist/
+*.egg-info/
