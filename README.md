@@ -5,19 +5,14 @@ This repository is for the [TempMail.lol](https://tempmail.lol/) Python API.
 
 ## Installation
 
-Use this commands to install dependency.
+Use this command in terminal.
 ```
-pip install requests
+pip install tempmail-lol
 ```
-Place the directory `TempMail` into your root directory where your main python file is located. 
-
-EX:
-
-![image](https://user-images.githubusercontent.com/32007930/168915320-963ffe0e-3b00-45ca-91f1-6f72aa99d8ee.png)
 
 ## Usage
 ```python
-from TempMail.TempMail import * #imports everything from TempMail library
+from TempMail import TempMail #imports everything from TempMail library
 import time #import time module
 
 inbox = TempMail.generateInbox() #returns an Inbox object with Email and Token
