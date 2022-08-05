@@ -33,6 +33,7 @@ class TempMail:
     """
     GenerateInbox will generate an inbox with an address and a token
     and returns an Inbox object
+    > rush = False will generate a normal inbox with no rush (https://tempmail.lol/news/2022/08/03/introducing-rush-mode-for-tempmail/)
     """
     def generateInbox(rush = False):
         try :
