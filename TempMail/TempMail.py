@@ -34,9 +34,9 @@ class TempMail:
     GenerateInbox will generate an inbox with an address and a token
     and returns an Inbox object
     """
-    def generateInbox():
+    def generateInbox(rush = False):
         try :
-            s = TempMail.makeHTTPRequest("/generate")
+            s = TempMail.makeHTTPRequest("/generate" + ("/rush" if rush else ""))
         except:
             print("Website responded with: "+ s)
         data = json.loads(s)
