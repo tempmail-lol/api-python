@@ -1,5 +1,7 @@
 # TempMail.lol Python API
-![image](https://img.shields.io/badge/Active-YES-brightgreen)
+<a href="https://discord.gg/GHapeHPWVS">
+    <img alt="discord" src="https://discord.com/api/guilds/899020130091139082/widget.png">
+</a>
 
 This repository is for the [TempMail.lol](https://tempmail.lol/) Python API.
 
