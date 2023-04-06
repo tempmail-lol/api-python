@@ -53,7 +53,7 @@ class TempMail:
         data = json.loads(s)
 
         #Raise an exception if the token is invalid
-        if "token" in s:
+        if "token" in s and "token" in data:
             if data["token"] == "invalid":
                 raise Exception("Invalid Token")
 
