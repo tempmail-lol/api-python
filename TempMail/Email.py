@@ -1,5 +1,5 @@
 """
-Email class is used to store the email data which consists of 
+Email class is used to store the email data which consists of
 the sender, recipient, subject, body, html and date
 """
 

@@ -5,38 +5,49 @@
 
 This repository is for the [TempMail.lol](https://tempmail.lol/) Python API.
 
+## Updating form v1
+The library is different from version 1.x.x.  Please see Usage to learn more about the changes to
+the Python library.
+
 ## Installation
 
-Use this command in terminal.
+You can install the TempMail API using PIP:
 ```
 pip install tempmail-lol
 ```
 
+## TempMail Plus (optional)
+
+Optionally, you can purchase time on a BananaCrumbs ID to get TempMail Plus.  This includes higher rate limits, as well
+as some other features.  For more info, see this page: https://tempmail.lol/pricing.html
+
 ## Usage
 ```python
-from TempMail import TempMail #imports everything from TempMail library
-import time #import time module
+from TempMail import TempMail
 
-inbox = TempMail.generateInbox() #returns an Inbox object with Email and Token
+# Create a new TempMail object
+tmp = TempMail()
 
-print("Email Address: "+ inbox.address) #View output below
-print("Authorization Token: "+ inbox.token)
+# If you have a BananaCrumbs ID, you can login using the constructor
+tmp = TempMail("24 number ID", "32 or 36 character token")
 
-#output: 
-"""
-    Email Address: m8h69n52824315@theeyeoftruth.com
-    Authorization Token: RCfc1og1z1JzuN1mkXL2eFdAc_8uxSRAwcGhUoXuH26e7nnJMdVVtSxxasZLD9D2OHTKIjVEvLhK7S0K5QIanA
-"""
+# Generate an inbox
+inb = TempMail.generateInbox(tmp)
 
-while(True): #Infinite Loop
-    emails = TempMail.getEmails(inbox) #Returns list of Email objects
-    print(emails) # View output below
-    time.sleep(30) #wait 30 sec
+# Generate an inbox using Community (formerly Rush) domains
+inb = TempMail.generateInbox(tmp, rush=True)
 
-#output:
-"""
-    [Email (sender=ExampleEmail@gmail.com, recipient=d6inmp52824914@magicaljellyfish.com, 
-            subject=Subject line, body=Text Area, html=<div dir="ltr">Text Area</div>, 
-            date=1652824961713 )]
-"""
+# Generate an inbox using a specific normal/community domain
+inb = TempMail.generateInbox(tmp, rush=False, domain="cringemonster.com")
+
+# Check for emails
+emails = TempMail.getEmails(tmp, inbox=inb)
+
+# Check custom domains (requires TempMail Plus)
+custom_domain_emails = TempMail.checkCustomInbox(tmp, "example.com", "token given on website")
 ```
+
+## Custom Domain Keys
+Note that the token for custom inboxes is stored on your domain as a text record with a name of `_tmpml` and a sha512 hash.
+The token that you submit is the text pre-sha512.  This helps disconnect a user's BananaCrumbs ID and the domain he/she owns.
+

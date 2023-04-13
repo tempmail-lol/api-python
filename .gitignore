@@ -3,3 +3,7 @@ TempMail/__pycache__/
 build/
 dist/
 *.egg-info/
+
+.idea
+*.iml
+venv
