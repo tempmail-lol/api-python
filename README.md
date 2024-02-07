@@ -10,9 +10,9 @@
   - [x] Inbox
 - [ ] **TempMail Plus/Ultra**
   - [ ] BananaCrumbs ID Authorization
-- [ ] **Inbox Methods**
+- [x] **Inbox Methods**
   - [x] Create new inbox
-  - [ ] Get emails in an inbox
+  - [x] Get emails in an inbox
 - [ ] **Custom Domains**
   - [ ] Get emails on a custom domain
   - [ ] Set custom domain ownership

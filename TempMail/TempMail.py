@@ -68,26 +68,26 @@ class TempMail:
             case 'domain':
                 #application/json {domain}
                 jsonDataRaw = {
-                    "domain": domainString
+                    "?domain": domainString
                 }
                 break
             case 'community':
                 #application/json {community}
                 jsonDataRaw = {
-                    "community": True 
+                    "?community": True 
                 }
                 break
             case 'prefix':
                 #application/json {prefix}
                 jsonDataRaw = {
-                    "prefix": prefixString 
+                    "?prefix": prefixString 
                 }
                 break
         
         jsonData = json.dumps(jsonDataRaw)
 
         s = TempMail.makeHTTPRequest(self, url, requestType, jsonData)
-        
+
         data = json.loads(s)
         return Inbox(data["address"], data["token"])
 
@@ -103,7 +103,8 @@ class TempMail:
         else:
             token = inbox
 
-        s = TempMail.makeHTTPRequest(self, "/auth/" + token)
+
+        s = TempMail.makeHTTPRequest(self, "/inbox/?token="+token, "GET")
         data = json.loads(s)
 
         # Raise an exception if the token is invalid
@@ -113,11 +114,13 @@ class TempMail:
 
         # if no emails are found, return an empty list
         # else return a list of email
-        if data["email"] is None:
+        if data["expired"] is False:
+            return ["Expired inbox"]
+        elif data["emails"] is None:
             return ["None"]
         else:
             emails = []
-            for email in data["email"]:
+            for email in data["emails"]:
                 # Some emails may not have html, so we will check for that
                 if "html" in email:
                     emails.append(
