@@ -3,6 +3,30 @@
     <img alt="discord" src="https://discord.com/api/guilds/899020130091139082/widget.png">
 </a>
 
+# ----------------------------------------------------
+## API v2 update checklist
+- [x] **Types**
+  - [x] Email
+  - [x] Inbox
+- [ ] **TempMail Plus/Ultra**
+  - [ ] BananaCrumbs ID Authorization
+- [ ] **Inbox Methods**
+  - [x] Create new inbox
+  - [ ] Get emails in an inbox
+- [ ] **Custom Domains**
+  - [ ] Get emails on a custom domain
+  - [ ] Set custom domain ownership
+- [ ] **Webhooks**
+  - [ ] Set account webhook
+  - [ ] Delete account webhook
+  - [ ] Set Custom Domain Webhook
+- [ ] **Miscellaneous**
+  - [ ] Server Stats
+  - [ ] Add community domain
+
+
+# ----------------------------------------------------
+
 This repository is for the [TempMail.lol](https://tempmail.lol/) Python API.
 
 ## Updating form v1

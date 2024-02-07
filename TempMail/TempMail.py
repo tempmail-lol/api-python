@@ -22,7 +22,7 @@ class TempMail:
     The content of the request is a json string and is returned as a string object
     """
 
-    def makeHTTPRequest(self, endpoint):
+    def makeHTTPRequest(self, endpoint, requestType, requestData):
         headers = {
             "User-Agent": "TempMailPythonAPI/1.0",
             "Accept": "application/json"
@@ -53,22 +53,41 @@ class TempMail:
     """
     GenerateInbox will generate an inbox with an address and a token
     and returns an Inbox object
-    > rush = False will generate a normal inbox with no rush (https://tempmail.lol/news/2022/08/03/introducing-rush-mode-for-tempmail/)
-    > domain = None will generate an inbox with a random domain
+    application/json options
+    ?domain 	string 	Specific domain to use to create an inbox
+    ?community 	boolean 	Create a random inbox with a community domain
+    ?prefix 	string 	Prefix of the created inbox, otherwise random letters
     """
 
-    def generateInbox(self, rush=False, domain=None):
-        url = "/generate"
-        # with rush mode: /generate/rush
-        # with domain: /generate/<domain>
-        # these two cannot be combined.  If both are true, only rush will be used
+    def generateInbox(self, inboxType='community', domainString=None, prefixString=None):
+        url = "/inbox/create"
+        requestType = "POST"
+        jsonDataRaw = {}
 
-        if rush:
-            url = url + "/rush"
-        elif domain is not None:
-            url = url + "/" + domain
+        match inboxType:
+            case 'domain':
+                #application/json {domain}
+                jsonDataRaw = {
+                    "domain": domainString
+                }
+                break
+            case 'community':
+                #application/json {community}
+                jsonDataRaw = {
+                    "community": True 
+                }
+                break
+            case 'prefix':
+                #application/json {prefix}
+                jsonDataRaw = {
+                    "prefix": prefixString 
+                }
+                break
+        
+        jsonData = json.dumps(jsonDataRaw)
 
-        s = TempMail.makeHTTPRequest(self, url)
+        s = TempMail.makeHTTPRequest(self, url, requestType, jsonData)
+        
         data = json.loads(s)
         return Inbox(data["address"], data["token"])
 
