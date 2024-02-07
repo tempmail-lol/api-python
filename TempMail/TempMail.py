@@ -6,7 +6,7 @@ from TempMail.Inbox import Inbox
 
 class TempMail:
     global BASE_URL
-    BASE_URL = "https://api.tempmail.lol"
+    BASE_URL = "https://api.tempmail.lol/v2"
 
     # class vars
     auth_id = None
