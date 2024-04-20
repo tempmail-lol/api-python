@@ -5,6 +5,8 @@
 
 This repository is for the [TempMail.lol](https://tempmail.lol/) Python API.
 
+# If you are using a new API Key, please use requests, [using the raw API](https://github.com/tempmail-lol/server/wiki/v2-API-Endpoints), until this library is updated.
+
 ## Updating form v1
 The library is different from version 1.x.x.  Please see Usage to learn more about the changes to
 the Python library.
