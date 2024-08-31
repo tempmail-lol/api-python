@@ -5,11 +5,10 @@
 
 This repository is for the [TempMail.lol](https://tempmail.lol/) Python API.
 
-# If you are using a new API Key, please use requests, [using the raw API](https://github.com/tempmail-lol/server/wiki/v2-API-Endpoints), until this library is updated.
+## Updating form v2
+The library is **completely** different from version 2.x.x.  Please see Usage to learn more about the changes to the Python library.
 
-## Updating form v1
-The library is different from version 1.x.x.  Please see Usage to learn more about the changes to
-the Python library.
+Please switch to the new version of the library if you are using a new API key.  If you are still using a BananaCrumbs ID, you must use v2.
 
 ## Installation
 
@@ -18,10 +17,11 @@ You can install the TempMail API using PIP:
 pip install tempmail-lol
 ```
 
-## TempMail Plus (optional)
+## TempMail Plus and Ultra
 
-Optionally, you can purchase time on a BananaCrumbs ID to get TempMail Plus.  This includes higher rate limits, as well
-as some other features.  For more info, see this page: https://tempmail.lol/pricing.html
+If you have a TempMail Plus or Ultra subscription, you can use it in the API.  Please see the usage below.  If you need help, ask in our Discord server above or email us at contact@bananacrumbs.us.
+
+**You do not need an API key to use the free tier of TempMail**.
 
 ## Usage
 ```python
@@ -30,26 +30,40 @@ from TempMail import TempMail
 # Create a new TempMail object
 tmp = TempMail()
 
-# If you have a BananaCrumbs ID, you can login using the constructor
-tmp = TempMail("24 number ID", "32 or 36 character token")
+# If you have an API Key, use it here (you do not need an API key to use the free tier)
+tmp = TempMail("tm.1234567890.randomcharactershere")
 
-# Generate an inbox
-inb = TempMail.generateInbox(tmp)
+# Generate an inbox with a random domain and prefix
+inb = tmp.createInbox()
 
-# Generate an inbox using Community (formerly Rush) domains
-inb = TempMail.generateInbox(tmp, rush=True)
+# Or... use a prefix
+inb = tmp.createInbox(prefix = "joe")
 
-# Generate an inbox using a specific normal/community domain
-inb = TempMail.generateInbox(tmp, rush=False, domain="cringemonster.com")
+# Generate an inbox using a specific domain (you can also use your custom domain here)
+# Prefixes on custom domains has no extra characters.  For example, a custom domain example.com
+# with a prefix of "whoever" will make "whoever@example.com".  If you do not provide a prefix,
+# a random one will be created for you.
+inb = tmp.createInbox(domain = "mycustomdomain.com", prefix = "optional")
 
-# Check for emails
-emails = TempMail.getEmails(tmp, inbox=inb)
+# Check for emails (throws exception on invalid token)
+emails = tmp.getEmails(inb)
 
-# Check custom domains (requires TempMail Plus)
-custom_domain_emails = TempMail.checkCustomInbox(tmp, "example.com", "token given on website")
+# Or... use the token (which is a string)
+emails = tmp.getEmails(inb.token)
+
+print("Emails:")
+
+for email in emails:
+    print("\tSender: " + email.sender)
+    print("\tRecipient: " + email.recipient)
+    print("\tSubject: " + email.subject)
+    print("\tBody: " + email.body)
+    print("\tHTML: " + str(email.html)) # may be None
+    print("\tDate: " + str(email.date)) # Unix timestamp in milliseconds
 ```
 
 ## Custom Domain Keys
 Note that the token for custom inboxes is stored on your domain as a text record with a name of `_tmpml` and a sha512 hash.
-The token that you submit is the text pre-sha512.  This helps disconnect a user's BananaCrumbs ID and the domain he/she owns.
+
+See more details in [accounts.tempmail.lol](https://accounts.tempmail.lol).
 
