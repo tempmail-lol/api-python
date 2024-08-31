@@ -19,7 +19,7 @@ setup(name='tempmail-lol',
       install_requires=['requests'],
       keywords=['tempmail', 'api', 'lol', 'tempmail-lol', 'tempmail.lol', 'email', 'free'],
       classifiers=[
-          "Development Status :: 1 - Planning",
+          "Development Status :: 5 - Production/Stable",
           "Intended Audience :: Developers",
           "Programming Language :: Python :: 3",
           "Operating System :: Unix",
