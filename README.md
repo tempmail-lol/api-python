@@ -19,7 +19,7 @@ pip install tempmail-lol
 
 ## TempMail Plus and Ultra
 
-If you have a TempMail Plus or Ultra subscription, you can use it in the API.  Please see the usage below.  If you need help, ask in our Discord server above or email us at contact@bananacrumbs.us.
+If you have a TempMail Plus or Ultra subscription, you can use it in the API.  Please see the usage below.  If you need help, ask in our [Discord Server](https://discord.gg/GkuEdPQjBa) or email us at contact@bananacrumbs.us.
 
 **You do not need an API key to use the free tier of TempMail**.
 
